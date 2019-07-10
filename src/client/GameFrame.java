@@ -8,8 +8,7 @@ import java.awt.event.WindowEvent;
 
 public class GameFrame extends Frame {
 
-    int x = 100, y = 100;
-    int speed = 10;
+    Tank player = new Tank();
 
     public GameFrame(){
 
@@ -20,20 +19,7 @@ public class GameFrame extends Frame {
         addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                switch (e.getKeyCode()){
-                    case KeyEvent.VK_LEFT:
-                        x -= speed;
-                        break;
-                    case KeyEvent.VK_UP:
-                        y -= speed;
-                        break;
-                    case KeyEvent.VK_RIGHT:
-                        x += speed;
-                        break;
-                    case KeyEvent.VK_DOWN:
-                        y += speed;
-                        break;
-                }
+                player.keyPressed(e);
             }
         });
 
@@ -47,6 +33,6 @@ public class GameFrame extends Frame {
 
     @Override
     public void paint(Graphics g){
-        g.fillRect(x,y,60,60);
+        player.paint(g);
     }
 }
