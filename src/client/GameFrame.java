@@ -10,8 +10,8 @@ import java.util.List;
 
 public class GameFrame extends Frame {
 
-    private static final int GAME_WIDTH = 800;
-    private static final int GAME_HEIGHT = 600;
+    public static final int GAME_WIDTH = 800;
+    public static final int GAME_HEIGHT = 600;
 
     Tank player = new Tank(this);
     List<Bullet> bullets = new ArrayList<>();
@@ -47,10 +47,16 @@ public class GameFrame extends Frame {
 
     @Override
     public void paint(Graphics g){
+        Color c = g.getColor();
+        g.setColor(Color.WHITE);
         player.paint(g);
-
+        g.drawString("bullets: "+bullets.size(),10,60);
+        g.setColor(c);
         for (int i = 0; i < bullets.size(); i++) {
             Bullet bullet = bullets.get(i);
+            if (!bullet.isLiving()){
+                bullets.remove(bullet);
+            }
             bullet.paint(g);
         }
     }

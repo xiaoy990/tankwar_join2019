@@ -9,11 +9,14 @@ public class Bullet {
     private int speed;
     private final int OFFSET = 15;
 
+    private boolean living;
+
     Bullet(Tank tank){
         x = tank.getX()+OFFSET;
         y = tank.getY()+OFFSET;
         dir = tank.getDir();
         speed = 15;
+        living = true;
     }
 
     void paint(Graphics g){
@@ -35,6 +38,7 @@ public class Bullet {
     }
 
     void move(){
+        if (x<0||x>GameFrame.GAME_WIDTH||y<0||y>GameFrame.GAME_HEIGHT){living = false;}
         switch (dir){
             case LEFT:
                 x -= speed;
@@ -51,4 +55,7 @@ public class Bullet {
         }
     }
 
+    public boolean isLiving() {
+        return living;
+    }
 }
