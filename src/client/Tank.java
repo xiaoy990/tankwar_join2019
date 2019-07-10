@@ -7,8 +7,11 @@ public class Tank {
 
     private int x,y;
     private int speed;
+    private boolean moving;
 
     private Dir dir;
+
+    boolean bL, bU, bR, bD;
 
     Tank(){
         this.x = 100;
@@ -38,21 +41,56 @@ public class Tank {
     void keyPressed(KeyEvent e){
         switch (e.getKeyCode()){
             case KeyEvent.VK_LEFT:
-                dir = Dir.LEFT;
+                bL = true;
                 break;
             case KeyEvent.VK_UP:
-                dir = Dir.UP;
+                bU = true;
                 break;
             case KeyEvent.VK_RIGHT:
-                dir = Dir.RIGHT;
+                bR = true;
                 break;
             case KeyEvent.VK_DOWN:
-                dir = Dir.DOWN;
+                bD = true;
                 break;
         }
+        changeTankDir();
     }
 
+    void keyReleased(KeyEvent e){
+        switch (e.getKeyCode()){
+            case KeyEvent.VK_LEFT:
+                bL = false;
+                break;
+            case KeyEvent.VK_UP:
+                bU = false;
+                break;
+            case KeyEvent.VK_RIGHT:
+                bR = false;
+                break;
+            case KeyEvent.VK_DOWN:
+                bD = false;
+                break;
+        }
+        changeTankDir();
+    }
+
+    private void changeTankDir() {
+        if (!bL && !bU && !bR && !bD){
+            moving = false;
+            return;
+        }
+        if (bL) dir = Dir.LEFT;
+        if (bU) dir = Dir.UP;
+        if (bR) dir = Dir.RIGHT;
+        if (bD) dir = Dir.DOWN;
+        moving = true;
+    }
+
+
     void move(){
+        if (!moving){
+            return;
+        }
         switch (dir){
             case LEFT:
                 x -= speed;

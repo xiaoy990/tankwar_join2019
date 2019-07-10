@@ -26,6 +26,11 @@ public class GameFrame extends Frame {
             public void keyPressed(KeyEvent e) {
                 player.keyPressed(e);
             }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                player.keyReleased(e);
+            }
         });
 
         addWindowListener(new WindowAdapter() {
