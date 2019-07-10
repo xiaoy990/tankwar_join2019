@@ -6,6 +6,8 @@ import java.awt.event.WindowEvent;
 
 public class GameFrame extends Frame {
 
+    int x = 100, y = 100;
+
     public GameFrame(){
 
         setLocation(100,100);
@@ -22,6 +24,7 @@ public class GameFrame extends Frame {
 
     @Override
     public void paint(Graphics g){
-        g.fillRect(100,400,60,60);
+        g.fillRect(x,y,60,60);
+        x++;
     }
 }
