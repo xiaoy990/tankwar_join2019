@@ -20,4 +20,8 @@ public class GameFrame extends Frame {
         });
     }
 
+    @Override
+    public void paint(Graphics g){
+        g.fillRect(100,400,60,60);
+    }
 }
