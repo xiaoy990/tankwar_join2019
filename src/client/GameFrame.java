@@ -5,12 +5,16 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameFrame extends Frame {
 
     private static final int GAME_WIDTH = 800;
     private static final int GAME_HEIGHT = 600;
-    Tank player = new Tank();
+
+    Tank player = new Tank(this);
+    List<Bullet> bullets = new ArrayList<>();
 
     Image offScreenImage;
 
@@ -44,6 +48,11 @@ public class GameFrame extends Frame {
     @Override
     public void paint(Graphics g){
         player.paint(g);
+
+        for (int i = 0; i < bullets.size(); i++) {
+            Bullet bullet = bullets.get(i);
+            bullet.paint(g);
+        }
     }
 
     @Override

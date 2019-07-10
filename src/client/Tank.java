@@ -8,16 +8,18 @@ public class Tank {
     private int x,y;
     private int speed;
     private boolean moving;
+    private GameFrame gameFrame;
 
     private Dir dir;
 
     boolean bL, bU, bR, bD;
 
-    Tank(){
+    Tank(GameFrame gameFrame){
         this.x = 100;
         this.y = 100;
         this.speed = 5;
         this.dir = Dir.UP;
+        this.gameFrame = gameFrame;
     }
 
     void paint(Graphics g){
@@ -70,6 +72,9 @@ public class Tank {
             case KeyEvent.VK_DOWN:
                 bD = false;
                 break;
+            case KeyEvent.VK_SPACE:
+                this.fire();
+                break;
         }
         changeTankDir();
     }
@@ -85,7 +90,6 @@ public class Tank {
         if (bD) dir = Dir.DOWN;
         moving = true;
     }
-
 
     void move(){
         if (!moving){
@@ -105,5 +109,21 @@ public class Tank {
                 y += speed;
                 break;
         }
+    }
+
+    void fire(){
+        gameFrame.bullets.add(new Bullet(this));
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public Dir getDir() {
+        return dir;
     }
 }
